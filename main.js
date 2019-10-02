@@ -15,26 +15,33 @@
 const mySnakeGame = () => {
   
   //Snake parameters
-  let snake = document.getElementById('snake');
-  let snakeWidth = 50;
-  let snakeHeight = 50;
+
+  const snake = {
+    body : document.getElementById('snake'),
+    width : 50,
+    height : 50,
+    speedX : 1,
+    speedY : 0,
+    positionX : 0,
+    positionY : 0
+  }
 
   //apple parameters
-  let apple = document.getElementById('apple');
-  const appleWidth = 50;
-  const appleHeight = 50;
-  let applePositionX = apple.style.top;
-  let applePositionY = apple.style.left;
+  const apple = {
+    body : document.getElementById('apple'),
+    width : 50,
+    height : 50,
+    positionX : document.getElementById('apple').style.top,
+    positionY : document.getElementById('apple').style.left
+  }
 
   //speed and position 
-  let speedX = 1;
-  let speedY = 0;
-  let positionX = 0;
-  let positionY = 0;
+  // let positionX = 0;
+  // let positionY = 0;
 
   const refreshRate = 10;
-  const maxXPosition = 500 - snakeWidth;
-  const maxYPosition = 500 - snakeHeight;
+  const maxXPosition = 500 - snake.width;
+  const maxYPosition = 500 - snake.height;
 
   //score
 
@@ -43,36 +50,36 @@ const mySnakeGame = () => {
 
   //sideways movement
   window.setInterval(() => {
-    positionX = positionX + speedX;
-    if (positionX > maxXPosition || positionX < 0) {
+    snake.positionX = snake.positionX + snake.speedX;
+    if (snake.positionX > maxXPosition || snake.positionX < 0) {
       resetGame();
     }
-    snake.style.left = positionX + "px";
+    snake.body.style.left = snake.positionX + "px";
     eatApple();
   }, refreshRate);
 
   //vertical movement
   window.setInterval(() => {
-    positionY = positionY + speedY;
-    if (positionY > maxYPosition || positionY < 0) {
+    snake.positionY = snake.positionY + snake.speedY;
+    if (snake.positionY > maxYPosition || snake.positionY < 0) {
       resetGame();
     }
-    snake.style.top = positionY + "px";
+    snake.body.style.top = snake.positionY + "px";
     eatApple();
   }, refreshRate);
 
   //reset the game
   
   const resetGame = () => {
-    positionX = 0;
-    positionY = 0;
-    speedX = 1;
-    speedY = 0;
-    speedX = speedX * -1;
-    applePositionX = 300;
-    applePositionY = 300;
-    apple.style.top = '300px';
-    apple.style.left = '300px';
+    snake.positionX = 0;
+    snake.positionY = 0;
+    snake.speedX = 1;
+    snake.speedY = 0;
+    snake.speedX = snake.speedX * -1;
+    apple.positionX = 300;
+    apple.positionY = 300;
+    apple.body.style.top = '300px';
+    apple.body.style.left = '300px';
     score = 0;
     updateScore(0);
   }
@@ -102,41 +109,41 @@ const mySnakeGame = () => {
 
   //functions for move keys
   const moveUp = () => {
-    speedY = 1;
-    speedX = 0;
-    if (speedY < 0) {
-        speedY = speedY * -1;
-    } else speedY = speedY;
+    snake.speedY = 1;
+    snake.speedX = 0;
+    if (snake.speedY < 0) {
+      snake.speedY = snake.speedY * -1;
+    } else snake.speedY = snake.speedY;
   }
 
   const moveDown = () => {
-    speedY = 1;
-    speedX = 0;
-    if (speedY > 0) {
-        speedY = speedY * -1;
-    } else speedY = speedY;
+    snake.speedY = 1;
+    snake.speedX = 0;
+    if (snake.speedY > 0) {
+      snake.speedY = snake.speedY * -1;
+    } else snake.speedY = snake.speedY;
   }
 
   const moveRight = () => {
-    speedY = 0;
-    speedX = 1;
-    if (speedX > 0) {
-        speedX = speedX * -1;
-    } else speedX = speedX;
+    snake.speedY = 0;
+    snake.speedX = 1;
+    if (snake.speedX > 0) {
+      snake.speedX = snake.speedX * -1;
+    } else snake.speedX = snake.speedX;
   }
 
   const moveLeft = () => {
-    speedY = 0;
-    speedX = 1;
-    if (speedX < 0) {
-        speedX = speedX * -1;
-    } else speedX = speedX;
+    snake.speedY = 0;
+    snake.speedX = 1;
+    if (snake.speedX < 0) {
+      snake.speedX = snake.speedX * -1;
+    } else snake.speedX = snake.speedX;
   }
 
   //detect if snake is touching apple and move it
 
   const eatApple = () => {
-    if ((positionX < applePositionX + appleWidth) && (positionX + snakeWidth > applePositionX) && (positionY < applePositionY + appleHeight) && (positionY + snakeHeight > applePositionY)) {
+    if ((snake.positionX < apple.positionX + apple.width) && (snake.positionX + snake.width > apple.positionX) && (snake.positionY < apple.positionY + apple.height) && (snake.positionY + snake.height > apple.positionY)) {
         // console.log("hit apple");
         // apple.style.display = 'none';
         updateScore(++score);
@@ -147,12 +154,12 @@ const mySnakeGame = () => {
   //randomise apple position each time
 
   const moveApple = () => {
-    applePositionX = Math.floor(Math.random() * 450);
-    applePositionY = Math.floor(Math.random() * 450);
-    apple.style.top = applePositionY + 'px';
-    apple.style.left = applePositionX + 'px';
-    console.log("The style is x: " + apple.style.top + " y: " + apple.style.left);
-    console.log("The position is x: " + applePositionX + " y: " + applePositionY);
+    apple.positionX = Math.floor(Math.random() * 450);
+    apple.positionY = Math.floor(Math.random() * 450);
+    apple.body.style.top = apple.positionY + 'px';
+    apple.body.style.left = apple.positionX + 'px';
+    console.log("The style is x: " + apple.body.style.top + " y: " + apple.body.style.left);
+    console.log("The position is x: " + apple.positionX + " y: " + apple.positionY);
   }
 
   //update the score by 1
