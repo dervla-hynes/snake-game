@@ -10,11 +10,10 @@
 //8. Randomise where the apple appears
 //9. When snake touches the apple, it also increases length
 
-//Snake should move continuously
 
 const mySnakeGame = () => {
   
-  //Snake parameters
+  //Snake object
 
   const snake = {
     body : document.getElementById('snake'),
@@ -23,10 +22,13 @@ const mySnakeGame = () => {
     speedX : 1,
     speedY : 0,
     positionX : 0,
-    positionY : 0
+    positionY : 0,
+    maxXPosition : 450,
+    maxYPosition : 450
   }
 
-  //apple parameters
+  //apple object
+
   const apple = {
     body : document.getElementById('apple'),
     width : 50,
@@ -35,53 +37,77 @@ const mySnakeGame = () => {
     positionY : document.getElementById('apple').style.left
   }
 
-  //speed and position 
-  // let positionX = 0;
-  // let positionY = 0;
+  //refresh rate 
 
   const refreshRate = 10;
-  const maxXPosition = 500 - snake.width;
-  const maxYPosition = 500 - snake.height;
 
   //score
 
   let scoreDisplay = document.getElementById('score');
   let score = 0;
 
+  //detect if snake is outside the box
+
+  const isOutsideXValues = () => {
+    return snake.positionX > snake.maxXPosition || snake.positionX < 0;
+  }
+
+  const isOutsideYValues = () => {
+    return snake.positionY > snake.maxYPosition || snake.positionY < 0;
+  }
+
   //sideways movement
-  window.setInterval(() => {
+
+  const moveSnakeAcross = () => {
     snake.positionX = snake.positionX + snake.speedX;
-    if (snake.positionX > maxXPosition || snake.positionX < 0) {
+    snake.body.style.left = snake.positionX + "px";
+  }
+
+  window.setInterval(() => {
+    moveSnakeAcross();
+    if (isOutsideXValues()) {
       resetGame();
     }
-    snake.body.style.left = snake.positionX + "px";
     eatApple();
   }, refreshRate);
 
   //vertical movement
-  window.setInterval(() => {
+
+  const moveSnakeDownwards = () => {
     snake.positionY = snake.positionY + snake.speedY;
-    if (snake.positionY > maxYPosition || snake.positionY < 0) {
+    snake.body.style.top = snake.positionY + "px";
+  }
+
+  window.setInterval(() => {
+    moveSnakeDownwards();
+    if (isOutsideYValues()) {
       resetGame();
     }
-    snake.body.style.top = snake.positionY + "px";
     eatApple();
   }, refreshRate);
 
   //reset the game
   
   const resetGame = () => {
+    resetSnake();
+    resetApple();
+    score = 0;
+    updateScore(score);
+  }
+
+  const resetSnake = () => {
     snake.positionX = 0;
     snake.positionY = 0;
     snake.speedX = 1;
     snake.speedY = 0;
     snake.speedX = snake.speedX * -1;
+  }
+
+  const resetApple = () => {
     apple.positionX = 300;
     apple.positionY = 300;
     apple.body.style.top = '300px';
     apple.body.style.left = '300px';
-    score = 0;
-    updateScore(0);
   }
 
   //arrow keys change direction
@@ -108,6 +134,7 @@ const mySnakeGame = () => {
   });
 
   //functions for move keys
+
   const moveUp = () => {
     snake.speedY = 1;
     snake.speedX = 0;
@@ -142,10 +169,12 @@ const mySnakeGame = () => {
 
   //detect if snake is touching apple and move it
 
+  const isColliding = () => {
+    return ((snake.positionX < apple.positionX + apple.width) && (snake.positionX + snake.width > apple.positionX) && (snake.positionY < apple.positionY + apple.height) && (snake.positionY + snake.height > apple.positionY));
+  }
+
   const eatApple = () => {
-    if ((snake.positionX < apple.positionX + apple.width) && (snake.positionX + snake.width > apple.positionX) && (snake.positionY < apple.positionY + apple.height) && (snake.positionY + snake.height > apple.positionY)) {
-        // console.log("hit apple");
-        // apple.style.display = 'none';
+    if (isColliding()) {
         updateScore(++score);
         moveApple();
     }
@@ -158,8 +187,6 @@ const mySnakeGame = () => {
     apple.positionY = Math.floor(Math.random() * 450);
     apple.body.style.top = apple.positionY + 'px';
     apple.body.style.left = apple.positionX + 'px';
-    console.log("The style is x: " + apple.body.style.top + " y: " + apple.body.style.left);
-    console.log("The position is x: " + apple.positionX + " y: " + apple.positionY);
   }
 
   //update the score by 1
@@ -168,9 +195,7 @@ const mySnakeGame = () => {
     return scoreDisplay.innerHTML = "Score : " + score;
   }
 
-  //speed up when you eat an apple
-
-  
+  //speed up when you eat an apple?
 
 };
 
