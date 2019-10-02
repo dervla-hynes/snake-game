@@ -1,0 +1,34 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+}
+
+#game-background {
+    background-image: url(./images/grass-background.jpeg);
+    width: 500px;
+    height: 500px;
+}
+
+#snake {
+    height: 50px;
+    width: 50px;
+    background-color: blue;
+    position: absolute;
+}
+
+#apple {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: 300px;
+    left: 300px;
+    display: block;
+}
+
