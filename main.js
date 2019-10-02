@@ -11,7 +11,7 @@
 //9. When snake touches the apple, it also increases length
 
 
-const mySnakeGame = () => {
+// const mySnakeGame = () => {
   
   //Snake object
 
@@ -68,6 +68,10 @@ const mySnakeGame = () => {
     if (isOutsideXValues()) {
       resetGame();
     }
+    moveSnakeDownwards();
+    if (isOutsideYValues()) {
+      resetGame();
+    }
     eatApple();
   }, refreshRate);
 
@@ -77,14 +81,6 @@ const mySnakeGame = () => {
     snake.positionY = snake.positionY + snake.speedY;
     snake.body.style.top = snake.positionY + "px";
   }
-
-  window.setInterval(() => {
-    moveSnakeDownwards();
-    if (isOutsideYValues()) {
-      resetGame();
-    }
-    eatApple();
-  }, refreshRate);
 
   //reset the game
   
@@ -183,6 +179,7 @@ const mySnakeGame = () => {
 
   //randomise apple position each time it moves
 
+
   const moveApple = () => {
     apple.positionX = Math.floor(Math.random() * 550);
     apple.positionY = Math.floor(Math.random() * 550);
@@ -203,9 +200,9 @@ const mySnakeGame = () => {
     snake.speedY = snake.speedY * 2;
   }
 
-};
+// };
 
-mySnakeGame();
+// mySnakeGame();
 
 
 
