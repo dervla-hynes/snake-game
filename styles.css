@@ -13,8 +13,8 @@ body {
 
 #game-background {
     background-image: url(./images/grass-background.jpeg);
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
 }
 
 #game-info {
