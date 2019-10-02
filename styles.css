@@ -12,7 +12,7 @@ body {
 }
 
 #game-background {
-    background-image: url(./images/grass-background.jpeg);
+    background-image: url(./images/dirt.jpg);
     width: 600px;
     height: 600px;
 }
@@ -25,12 +25,17 @@ body {
 
 p {
     padding: 20px;
+    font-size: 1.5em;
+}
+
+h1 {
+    font-family: 'Mansalva', cursive;
+    font-size: 3em;
 }
 
 #snake {
     height: 50px;
     width: 50px;
-    background-color: blue;
     position: absolute;
 }
 
