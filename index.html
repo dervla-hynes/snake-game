@@ -6,15 +6,20 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="styles.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
         <script src="main.js" async defer></script>
     </head>
     <body>
         <div id="game-background">
-            <div id="snake"></div>
+            <div id="snake">
+                <img src="./images/caterpillar-face.jpg" id="caterpillar-image" alt="">
+            </div>
             <img id="apple" src="./images/apple.jpg"></img>
         </div>
         <div id="game-info">
-            <h1>Snake game</h1>
+            <h1>A very hungry caterpillar game.</h1>
+            <p>Collect as many apples as you can!</p>
+            <p id="score">Score : 0</p>
         </div>
     </body>
 </html>

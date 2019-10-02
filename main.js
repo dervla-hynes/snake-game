@@ -21,10 +21,10 @@ const mySnakeGame = () => {
 
   //apple parameters
   let apple = document.getElementById('apple');
-  let appleWidth = 50;
-  let appleHeight = 50;
-  let applePositionX = 300;
-  let applePositionY = 300;
+  const appleWidth = 50;
+  const appleHeight = 50;
+  let applePositionX = apple.style.top;
+  let applePositionY = apple.style.left;
 
   //speed and position 
   let speedX = 1;
@@ -35,6 +35,11 @@ const mySnakeGame = () => {
   const refreshRate = 10;
   const maxXPosition = 500 - snakeWidth;
   const maxYPosition = 500 - snakeHeight;
+
+  //score
+
+  let scoreDisplay = document.getElementById('score');
+  let score = 0;
 
   //sideways movement
   window.setInterval(() => {
@@ -64,8 +69,12 @@ const mySnakeGame = () => {
     speedX = 1;
     speedY = 0;
     speedX = speedX * -1;
-    apple.style.display = 'unset';
-    snake.style.backgroundColor = 'blue';
+    applePositionX = 300;
+    applePositionY = 300;
+    apple.style.top = '300px';
+    apple.style.left = '300px';
+    score = 0;
+    updateScore(0);
   }
 
   //arrow keys change direction
@@ -124,17 +133,37 @@ const mySnakeGame = () => {
     } else speedX = speedX;
   }
 
-  //detect if snake is touching apple and 'eat' it
+  //detect if snake is touching apple and move it
 
   const eatApple = () => {
     if ((positionX < applePositionX + appleWidth) && (positionX + snakeWidth > applePositionX) && (positionY < applePositionY + appleHeight) && (positionY + snakeHeight > applePositionY)) {
         // console.log("hit apple");
-        apple.style.display = 'none';
-        snake.style.backgroundColor = 'red';
+        // apple.style.display = 'none';
+        updateScore(++score);
+        moveApple();
     }
   }
 
   //randomise apple position each time
+
+  const moveApple = () => {
+    applePositionX = Math.floor(Math.random() * 450);
+    applePositionY = Math.floor(Math.random() * 450);
+    apple.style.top = applePositionY + 'px';
+    apple.style.left = applePositionX + 'px';
+    console.log("The style is x: " + apple.style.top + " y: " + apple.style.left);
+    console.log("The position is x: " + applePositionX + " y: " + applePositionY);
+  }
+
+  //update the score by 1
+
+  const updateScore = (score) => {
+    return scoreDisplay.innerHTML = "Score : " + score;
+  }
+
+  //speed up when you eat an apple
+
+  
 
 };
 
