@@ -23,8 +23,8 @@ const mySnakeGame = () => {
     speedY : 0,
     positionX : 0,
     positionY : 0,
-    maxXPosition : 450,
-    maxYPosition : 450
+    maxXPosition : 550,
+    maxYPosition : 550
   }
 
   //apple object
@@ -56,7 +56,7 @@ const mySnakeGame = () => {
     return snake.positionY > snake.maxYPosition || snake.positionY < 0;
   }
 
-  //sideways movement
+  //sideways constant movement of snake
 
   const moveSnakeAcross = () => {
     snake.positionX = snake.positionX + snake.speedX;
@@ -71,7 +71,7 @@ const mySnakeGame = () => {
     eatApple();
   }, refreshRate);
 
-  //vertical movement
+  //vertical constant movement of snake
 
   const moveSnakeDownwards = () => {
     snake.positionY = snake.positionY + snake.speedY;
@@ -110,7 +110,7 @@ const mySnakeGame = () => {
     apple.body.style.left = '300px';
   }
 
-  //arrow keys change direction
+  //allow the arrow keys to change direction
 
   document.addEventListener("keydown", event => {
     switch (event.keyCode) {
@@ -133,7 +133,7 @@ const mySnakeGame = () => {
     }
   });
 
-  //functions for move keys
+  //functions for each arrow key
 
   const moveUp = () => {
     snake.speedY = 1;
@@ -167,7 +167,7 @@ const mySnakeGame = () => {
     } else snake.speedX = snake.speedX;
   }
 
-  //detect if snake is touching apple and move it
+  //detect if the snake is touching the apple, and then move the apple and add 1 to score
 
   const isColliding = () => {
     return ((snake.positionX < apple.positionX + apple.width) && (snake.positionX + snake.width > apple.positionX) && (snake.positionY < apple.positionY + apple.height) && (snake.positionY + snake.height > apple.positionY));
@@ -176,15 +176,16 @@ const mySnakeGame = () => {
   const eatApple = () => {
     if (isColliding()) {
         updateScore(++score);
+        speedUp();
         moveApple();
     }
   }
 
-  //randomise apple position each time
+  //randomise apple position each time it moves
 
   const moveApple = () => {
-    apple.positionX = Math.floor(Math.random() * 450);
-    apple.positionY = Math.floor(Math.random() * 450);
+    apple.positionX = Math.floor(Math.random() * 550);
+    apple.positionY = Math.floor(Math.random() * 550);
     apple.body.style.top = apple.positionY + 'px';
     apple.body.style.left = apple.positionX + 'px';
   }
@@ -196,6 +197,11 @@ const mySnakeGame = () => {
   }
 
   //speed up when you eat an apple?
+
+  const speedUp = () => {
+    snake.speedX = snake.speedX * 2;
+    snake.speedY = snake.speedY * 2;
+  }
 
 };
 
