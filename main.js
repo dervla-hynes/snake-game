@@ -1,18 +1,5 @@
 //Snake game
 
-//1. Create a backdrop (DONE)
-//2. Create a box that you can move around (DONE)
-//3. Make box move around by itself too (DONE)
-//4. Create an apple that you can put on the backdrop (DONE)
-//5. When snake touches the apple, it dissapears (DONE)
-//6. When snake touches boundary you reset (DONE)
-//7. When snake bumps into itself it resets
-//8. Randomise where the apple appears
-//9. When snake touches the apple, it also increases length
-
-
-//Game starting screen 
-
 //start the game with spacebar
 
 document.addEventListener("keydown", event => {
@@ -22,7 +9,7 @@ document.addEventListener("keydown", event => {
     document.getElementById("game-background").style.display = "block";
     document.getElementById("game-info").style.display = "block";
   }
-});
+}, {once : true});
 
 //function for running the game
 
@@ -87,7 +74,7 @@ const mySnakeGame = () => {
     if (isOutsideYValues()) {
       resetGame();
     }
-    eatApple();
+    (eatApple())
   }, refreshRate);
 
   //vertical constant movement of snake
@@ -105,6 +92,7 @@ const mySnakeGame = () => {
     score = 0;
     updateScore(score);
   }
+
 
   const resetSnake = () => {
     snake.positionX = 0;
