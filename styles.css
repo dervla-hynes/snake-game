@@ -2,25 +2,78 @@
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'PT Serif', serif;
 }
 
 body {
     display: flex;
     flex-direction: row;
-    background-color: rgb(127, 255, 159);
+    background-color: rgb(59, 134, 33);;
 }
 
-#game-background {
-    background-image: url(./images/dirt.jpg);
-    width: 600px;
+#starting-screen {
+    height: 500px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#starting-screen img {
     height: 600px;
+    padding: 20px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border: 2px solid white;
+}
+
+#starting-screen h1 {
+    font-size: 3em;
+    color: rgb(59, 134, 33);
+    position: absolute;
+    top: 225px;
+    left: 150px;
+    font-family: 'Mansalva', cursive;
+}
+
+#starting-screen h2 {
+    font-size: 1.3em;
+    color: red;
+    position: absolute;
+    top: 290px;
+    left: 120px;
+    animation: blinker 1s step-start infinite;
+  }
+  
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+#game-background {
+    display: none;
+    background-image: url(./images/dirt.jpg);
+    width: 550px;
+    height: 550px;
+    margin: 30px;
+    position: relative;
 }
 
 #game-info {
+    display: none;
     margin: auto;
     text-align: center;
-    color: green;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#game-info img {
+    height: 300px;
 }
 
 p {
@@ -28,15 +81,12 @@ p {
     font-size: 1.5em;
 }
 
-h1 {
-    font-family: 'Mansalva', cursive;
-    font-size: 3em;
-}
-
 #snake {
     height: 50px;
     width: 50px;
     position: absolute;
+    top: 30px;
+    left: 30px;
 }
 
 #caterpillar-image {

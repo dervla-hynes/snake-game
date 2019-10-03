@@ -11,7 +11,22 @@
 //9. When snake touches the apple, it also increases length
 
 
-// const mySnakeGame = () => {
+//Game starting screen 
+
+//start the game with spacebar
+
+document.addEventListener("keydown", event => {
+  if (event.keyCode == 32) { 
+    mySnakeGame();
+    document.getElementById("starting-screen").style.display = "none";
+    document.getElementById("game-background").style.display = "block";
+    document.getElementById("game-info").style.display = "block";
+  }
+});
+
+//function for running the game
+
+const mySnakeGame = () => {
   
   //Snake object
 
@@ -23,8 +38,8 @@
     speedY : 0,
     positionX : 0,
     positionY : 0,
-    maxXPosition : 550,
-    maxYPosition : 550
+    maxXPosition : 500,
+    maxYPosition : 500
   }
 
   //apple object
@@ -39,7 +54,7 @@
 
   //refresh rate 
 
-  const refreshRate = 10;
+  const refreshRate = 1;
 
   //score
 
@@ -172,7 +187,6 @@
   const eatApple = () => {
     if (isColliding()) {
         updateScore(++score);
-        speedUp();
         moveApple();
     }
   }
@@ -181,8 +195,8 @@
 
 
   const moveApple = () => {
-    apple.positionX = Math.floor(Math.random() * 550);
-    apple.positionY = Math.floor(Math.random() * 550);
+    apple.positionX = Math.floor(Math.random() * 500);
+    apple.positionY = Math.floor(Math.random() * 500);
     apple.body.style.top = apple.positionY + 'px';
     apple.body.style.left = apple.positionX + 'px';
   }
@@ -192,17 +206,8 @@
   const updateScore = (score) => {
     return scoreDisplay.innerHTML = "Score : " + score;
   }
+};
 
-  //speed up when you eat an apple?
-
-  const speedUp = () => {
-    snake.speedX = snake.speedX * 2;
-    snake.speedY = snake.speedY * 2;
-  }
-
-// };
-
-// mySnakeGame();
 
 
 
