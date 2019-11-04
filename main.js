@@ -181,7 +181,6 @@ const mySnakeGame = () => {
 
   //randomise apple position each time it moves
 
-
   const moveApple = () => {
     apple.positionX = Math.floor(Math.random() * 500);
     apple.positionY = Math.floor(Math.random() * 500);
